@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawk - Device Detection & Environment Monitoring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Hawk</h1>
+            <p class="subtitle">Device Detection & Environment Monitoring</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Introduction -->
+            <section class="section">
+                <h2>What is Hawk?</h2>
+                <p>Hawk is a comprehensive device detection and environment monitoring library that scans and identifies your device, operating system, and runtime environment in real-time.</p>
+            </section>
+
+            <!-- Features -->
+            <section class="section">
+                <h2>Features</h2>
+                <ul class="features-list">
+                    <li>Cross-platform device detection (mobile, desktop, tablet, terminal)</li>
+                    <li>Operating system identification with version detection</li>
+                    <li>CPU architecture and hardware capability detection</li>
+                    <li>Runtime environment identification (browser, Node.js, Electron, etc.)</li>
+                    <li>Device capability detection (WebGL, geolocation, camera, etc.)</li>
+                    <li>Metadata collection (timezone, language, hardware concurrency)</li>
+                    <li>Built-in caching for performance optimization</li>
+                    <li>Modular and extensible architecture</li>
+                </ul>
+            </section>
+
+            <!-- Scanner Section -->
+            <section class="section">
+                <h2>Live Device Scanner</h2>
+                <div id="scanner-container" class="scanner-container">
+                    <button id="scan-button" class="scan-button">Scan Your Device</button>
+                    <div id="results" class="results" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- Installation -->
+            <section class="section">
+                <h2>Installation</h2>
+                <h3>Browser</h3>
+                <pre><code>&lt;script src="path/to/hawk.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const monitor = new DeviceMonitor();
+  monitor.detect().then(profile =&gt; {
+    console.log(profile);
+  });
+&lt;/script&gt;</code></pre>
+
+                <h3>Node.js</h3>
+                <pre><code>const DeviceMonitor = require("./path/to/hawk.js");
+
+async function getDeviceProfile() {
+  const monitor = new DeviceMonitor({ debugMode: true });
+  const profile = await monitor.detect();
+  console.log(profile);
+}
+
+getDeviceProfile();</code></pre>
+            </section>
+
+            <!-- Usage -->
+            <section class="section">
+                <h2>Basic Usage</h2>
+                <pre><code>const monitor = new DeviceMonitor();
+
+monitor.detect().then(profile =&gt; {
+  console.log("Device Profile:", profile);
+});
+
+// With options
+const monitor = new DeviceMonitor({
+  enableCache: true,
+  cacheTTL: 600000,  // 10 minutes
+  debugMode: true
+});
+
+// Clear cache
+monitor.clearCache();</code></pre>
+            </section>
+
+            <!-- API Reference -->
+            <section class="section">
+                <h2>API Reference</h2>
+                <h3>DeviceMonitor Class</h3>
+                <p><strong>constructor(options)</strong> - Initialize with optional configuration</p>
+                <p><strong>detect()</strong> - Asynchronously detect device profile (returns Promise)</p>
+                <p><strong>clearCache()</strong> - Clear cached detection results</p>
+
+                <h3>Configuration Options</h3>
+                <table class="options-table">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>enableCache</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Enable/disable result caching</td>
+                        </tr>
+                        <tr>
+                            <td>cacheTTL</td>
+                            <td>number</td>
+                            <td>300000</td>
+                            <td>Cache TTL in milliseconds</td>
+                        </tr>
+                        <tr>
+                            <td>debugMode</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Enable console logging</td>
+                        </tr>
+                        <tr>
+                            <td>customDetectors</td>
+                            <td>Array</td>
+                            <td>[]</td>
+                            <td>Custom detector instances</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Profile Output -->
+            <section class="section">
+                <h2>Device Profile Output</h2>
+                <p>The detect() method returns a comprehensive profile with the following structure:</p>
+                <pre><code>{
+  timestamp: "2024-01-15T10:30:00.000Z",
+  os: { name, version, platform, family, kernel, distribution },
+  deviceType: { type, isMobile, isDesktop, isTablet, ... },
+  screen: { width, height, pixelRatio, colorDepth, orientation, ... },
+  architecture: { cpu, bits, endian, cores },
+  environment: { runtime, runtimeVersion, isBrowser, isNode, ... },
+  capabilities: { webgl, serviceWorker, geolocation, camera, ... },
+  userAgent: "...",
+  metadata: { timezone, language, hardwareConcurrency, ... }
+}</code></pre>
+            </section>
+
+            <!-- Examples -->
+            <section class="section">
+                <h2>Examples</h2>
+                <h3>Conditional Logic Based on Device Type</h3>
+                <pre><code>monitor.detect().then(profile =&gt; {
+  if (profile.deviceType.isMobile) {
+    console.log('Loading mobile version');
+  } else if (profile.deviceType.isTablet) {
+    console.log('Loading tablet version');
+  } else {
+    console.log('Loading desktop version');
+  }
+});</code></pre>
+
+                <h3>Checking Device Capabilities</h3>
+                <pre><code>monitor.detect().then(profile =&gt; {
+  if (profile.capabilities.geolocation) {
+    navigator.geolocation.getCurrentPosition(position =&gt; {
+      console.log('User location:', position.coords);
+    });
+  }
+  
+  if (profile.capabilities.camera) {
+    console.log('Camera is available');
+  }
+});</code></pre>
+            </section>
+
+            <!-- Footer -->
+            <section class="section footer-section">
+                <h3>About</h3>
+                <p><strong>Author:</strong> Uviwe Menyiwe (Azura)</p>
+                <p><strong>Organization:</strong> Hael Foundation</p>
+                <p><strong>License:</strong> MIT</p>
+                <p><a href="README.md">View Full Documentation</a></p>
+            </section>
+        </main>
+    </div>
+
+    <script src="../src/hawk.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
