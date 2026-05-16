@@ -1,65 +1,92 @@
-# Contributing to Hawk
+# Contributing to hawk
 
-Thank you for your interest in contributing to Hawk! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to hawk!
 
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/yourusername/hawk.git`
-3. Create a feature branch: `git checkout -b feature/your-feature-name`
-4. Make your changes
-5. Commit your changes: `git commit -am 'Add your feature'`
-6. Push to the branch: `git push origin feature/your-feature-name`
-7. Submit a pull request
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/hawk.git`
+3. Create a feature branch: `git checkout -b feature/your-feature`
+4. Install dependencies: `npm install`
+5. Create a `.env` file if needed (see `.env.example`)
 
-## Code Style
+## Development Setup
 
-- Use consistent indentation (2 spaces)
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Follow existing code patterns in the project
+```bash
+# Install dependencies
+npm install
 
-## Testing
+# Run tests
+npm test
 
-Before submitting a pull request:
+# Run linting
+npm run lint
 
-1. Test your changes thoroughly
-2. Ensure backward compatibility
-3. Test across different browsers and environments
-4. Run any existing tests: `npm test`
+# Build the project
+npm run build
 
-## Reporting Issues
+# Start development server (if applicable)
+npm run dev
+```
 
-When reporting bugs, please include:
+## Code Standards
 
-- A clear description of the issue
-- Steps to reproduce the problem
-- Expected behavior
-- Actual behavior
-- Environment details (OS, browser, Node.js version)
-- Code examples if applicable
+- Follow the existing code style (enforced by Prettier and ESLint)
+- Write tests for new features
+- Update documentation as needed
+- Use conventional commit messages: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `chore:`
 
-## Feature Requests
+## Branch Naming
 
-When suggesting new features:
-
-- Clearly describe the feature
-- Explain the use case
-- Provide examples of how it would be used
-- Consider backward compatibility
+Use the following patterns:
+- `feature/your-feature` - New features
+- `fix/your-fix` - Bug fixes
+- `hotfix/critical-fix` - Critical production fixes
+- `docs/update-docs` - Documentation updates
+- `chore/maintenance` - Maintenance tasks
 
 ## Pull Request Process
 
-1. Update the README.md with details of changes if applicable
-2. Update version numbers following semantic versioning
-3. Ensure all tests pass
-4. Provide a clear description of your changes
-5. Reference any related issues
+1. Ensure all tests pass: `npm test`
+2. Ensure code is properly formatted: `npm run lint`
+3. Create a descriptive PR title following conventional commits
+4. Provide a clear description of changes
+5. Link any related issues
+6. Wait for code review and CI checks to pass
+7. Once approved, your PR will be merged
+
+## Commit Messages
+
+Follow conventional commits format:
+```
+feat: add device detection for new browsers
+fix: resolve memory leak in tracking module
+docs: update API documentation
+test: add unit tests for parser
+chore: update dependencies
+```
+
+## Testing
+
+All pull requests must include:
+- Unit tests for new functionality
+- Integration tests where applicable
+- Updated test snapshots if needed
+
+Run tests with:
+```bash
+npm test
+```
+
+## Performance Considerations
+
+- Device detection should be fast and efficient
+- Minimize bundle size impact
+- Cache results where appropriate
+- Profile code with performance monitoring tools
 
 ## Questions?
 
-Feel free to open an issue for questions or discussions about the project.
+Feel free to open an issue or reach out to maintainers.
 
-## License
-
-By contributing to Hawk, you agree that your contributions will be licensed under the MIT License.
+Happy coding! 🚀
